@@ -6,6 +6,7 @@ import com.example.demo.db.DAOException;
 import com.example.demo.db.ProductTextFile;
 import com.example.demo.ui.Console;
 import com.example.demo.ui.StringUtils;
+import controller.ProductController;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,16 +32,36 @@ public class ProductService {
         }
     }
 
+    /**
+     * Data methods
+     * @return
+     */
     public List<Product> gatherProducts(){
         List<Product> products = new ArrayList<>();
         try {
             products = file.getAll();
         } catch (DAOException e) {
             System.out.println("cannot read file\n");
+            // throw 500
         }
         return products;
     }
 
+    public Product getProduct(String id) {
+        Product product = new Product();
+        try {
+            product = file.get(id);
+
+        } catch(DAOException e) {
+            System.out.println(e.getMessage());
+            // throw 404
+        }
+        return product;
+    }
+
+    /**
+     * CLI Methods
+     */
     public static void displayAllProducts() {
         System.out.println("PRODUCT LIST");
 
