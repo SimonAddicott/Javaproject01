@@ -89,11 +89,7 @@ public class ProductService {
         System.out.println(sb.toString());
     }
 
-    public static void addProduct() {
-        String code = Console.getString("Enter product code: ");
-        String description = Console.getLine("Enter product description: ");
-        double price = Console.getDouble("Enter price: ");
-
+    public boolean addProduct(String code, String description, double price) {
         Product product = new Product();
         product.setCode(code);
         product.setDescription(description);
@@ -103,13 +99,15 @@ public class ProductService {
             file.add(product);
         } catch (DAOException e) {
             System.out.println("Error adding product.\n");
-            return;
+            return false;
         }
 
-        System.out.println(description + " has been added.\n");
+        return true;
     }
 
-    public static void deleteProduct() {
+
+
+    public void deleteProduct() {
         String code = Console.getString("Enter product code to delete: ");
 
         try {

@@ -1,7 +1,7 @@
 package com.example.demo.rest;
 
 import com.example.demo.business.Product;
-import com.example.demo.service.ProductService;
+import com.example.demo.service.WebProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +14,9 @@ import java.util.List;
 @RestController
 public class ProductRestController {
 
-    private ProductService productService;
+    private WebProductService productService;
 
-    public ProductRestController(ProductService productService) {
+    public ProductRestController(WebProductService productService) {
         this.productService = productService;
     }
 
