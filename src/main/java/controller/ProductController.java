@@ -23,10 +23,10 @@ public class ProductController {
             if (action.equalsIgnoreCase("list")) {
                 productService.displayAllProducts();
             } else if (action.equalsIgnoreCase("add")) {
-                productService.addProduct();
+                //productService.addProduct();
             } else if (action.equalsIgnoreCase("del") ||
                     action.equalsIgnoreCase("delete")) {
-                productService.deleteProduct();
+                //productService.deleteProduct();
             } else if (action.equalsIgnoreCase("help") ||
                     action.equalsIgnoreCase("menu")) {
                 displayMenu();

@@ -62,17 +62,10 @@ public class ProductService {
     /**
      * CLI Methods
      */
-    public static void displayAllProducts() {
+    public void displayAllProducts() {
         System.out.println("PRODUCT LIST");
 
-        List<Product> products;
-        try {
-            products = file.getAll();
-        } catch (DAOException e) {
-            System.out.println("cannot read file\n");
-            //throw new Exception("Error reading product list.");
-            return;
-        }
+        List<Product> products = gatherProducts();
 
         Product p;
         StringBuilder sb = new StringBuilder();
@@ -89,7 +82,7 @@ public class ProductService {
         System.out.println(sb.toString());
     }
 
-    public boolean addProduct(String code, String description, double price) {
+    public boolean addProductToFile(String code, String description, double price) {
         Product product = new Product();
         product.setCode(code);
         product.setDescription(description);
@@ -105,22 +98,19 @@ public class ProductService {
         return true;
     }
 
-
-
-    public void deleteProduct() {
-        String code = Console.getString("Enter product code to delete: ");
-
+    public boolean deleteProductFromFile(String productCode) {
         try {
-            Product p = file.get(code);
+            Product p = file.get(productCode);
             if (p == null) {
-                System.out.println("No product matches that code.\n");
+                return false;
+
             } else {
                 file.delete(p);
-                System.out.println(p.getDescription()
-                        + " has been deleted.\n");
+                return true;
+
             }
         } catch (DAOException e) {
-            System.out.println("Error deleting product.\n");
+            return false;
         }
     }
 }
