@@ -4,9 +4,7 @@ import com.example.demo.business.Product;
 import com.example.demo.db.DAO;
 import com.example.demo.db.DAOException;
 import com.example.demo.db.ProductTextFile;
-import com.example.demo.ui.Console;
 import com.example.demo.ui.StringUtils;
-import controller.ProductController;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,15 +45,9 @@ public class ProductService {
         return products;
     }
 
-    public Product getProduct(String id) {
+    public Product getProduct(String id) throws DAOException {
         Product product = new Product();
-        try {
-            product = file.get(id);
-
-        } catch(DAOException e) {
-            System.out.println(e.getMessage());
-            // throw 404
-        }
+        product = file.get(id);
         return product;
     }
 

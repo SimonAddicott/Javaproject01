@@ -64,7 +64,7 @@ public final class ProductTextFile implements DAO<Product> {
                 return p;
             }
         }
-        return null;
+        throw new DAOException(code + " not found");
     }
 
     @Override

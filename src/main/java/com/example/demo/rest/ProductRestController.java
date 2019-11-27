@@ -1,6 +1,7 @@
 package com.example.demo.rest;
 
 import com.example.demo.business.Product;
+import com.example.demo.db.DAOException;
 import com.example.demo.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class ProductRestController {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public ResponseEntity listProduct(
             @PathVariable("id") String productId
-    ) {
+    ) throws DAOException {
         Product product = this.productService.getProduct(productId);
         return new ResponseEntity(product, HttpStatus.OK);
     }
@@ -67,5 +68,11 @@ public class ProductRestController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(DAOException.class)
+    public ResponseEntity handleException(DAOException e) {
+        return new ResponseEntity("Sorry, that request went a bit wrong...", HttpStatus.NOT_FOUND);
+        //return "Whoops! Sorry, that request went a bit wrong....";
     }
 }
