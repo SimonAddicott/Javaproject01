@@ -73,6 +73,5 @@ public class ProductRestController {
     @ExceptionHandler(DAOException.class)
     public ResponseEntity handleException(DAOException e) {
         return new ResponseEntity("Sorry, that request went a bit wrong...", HttpStatus.NOT_FOUND);
-        //return "Whoops! Sorry, that request went a bit wrong....";
     }
 }
