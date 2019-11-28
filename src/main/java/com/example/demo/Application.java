@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan({
         "com.example.demo.rest",
-        "com.example.demo.service",
         "com.example.demo.repository",
         "com.example.demo.db"
 })

@@ -19,26 +19,18 @@ public class ProductRestController {
         this.productRepository = productRepository;
     }
 
-    /**
-     * Read ALL
-     * @return
-     */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public ResponseEntity listAll() {
         List<Product> products = this.productRepository.findAll();
         return new ResponseEntity(products, HttpStatus.OK);
     }
 
-    /**
-     * Read SINGLE
-     * @return
-     */
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public ResponseEntity listProduct(
             @PathVariable("id") String productId
     ) throws ProductNotFoundException {
-
-        Product product = this.productRepository.findById(productId)
+        Product product = this.productRepository
+                .findById(productId)
                 .orElseThrow(
                         () -> new ProductNotFoundException()
                 );
@@ -46,10 +38,6 @@ public class ProductRestController {
         return new ResponseEntity(product, HttpStatus.OK);
     }
 
-    /**
-     * Create
-     * @return
-     */
     @RequestMapping(value = "/product", method = RequestMethod.POST)
     public ResponseEntity listProduct(
             @RequestParam("code") String code,
@@ -60,24 +48,14 @@ public class ProductRestController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * Delete
-     */
     @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity
-
-    deleteProduct(
+    public ResponseEntity deleteProduct(
             @PathVariable("id") String productId
     ) {
         this.productRepository.deleteById(productId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * ExceptionHandler
-     * @param e
-     * @return
-     */
     @ExceptionHandler(DAOException.class)
     public ResponseEntity handleException(DAOException e) {
         return new ResponseEntity("Sorry, that request went a bit wrong...", HttpStatus.NOT_FOUND);
