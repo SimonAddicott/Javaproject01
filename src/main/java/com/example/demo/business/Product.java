@@ -1,10 +1,13 @@
 package com.example.demo.business;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.text.NumberFormat;
 
+@Entity
 public class Product {
 
-    private String code;
+    private @Id String code;
     private String description;
     private double price;
 
